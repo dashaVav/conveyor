@@ -1,18 +1,25 @@
 package com.example.conveyor.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record LoanApplicationRequestDTO(
-        BigDecimal amount,
-        Integer term,
-        String firstName,
-        String lastName,
-        String middleName,
-        String email,
-        LocalDate birthdate,
-        String passportSeries,
-        String passportNumber
-
-) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class LoanApplicationRequestDTO {
+    private BigDecimal amount;
+    private Integer term;
+    private String firstName;
+    private String lastName;
+    private String middleName;
+    private String email;
+    private LocalDate birthdate;
+    private String passportSeries;
+    private String passportNumber;
 }

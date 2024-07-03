@@ -11,16 +11,16 @@ import java.util.regex.Pattern;
 
 @Service
 public class PrescoringService {
-    public void isApplicationRequestValid(LoanApplicationRequestDTO applicationRequest) {
-        validationOfFirstName(applicationRequest.firstName());
-        validationOfLastName(applicationRequest.lastName());
-        validationOfMiddleName(applicationRequest.middleName());
-        validationOfCreditAmount(applicationRequest.amount());
-        validationOfTerm(applicationRequest.term());
-        validationOfBirthdate(applicationRequest.birthdate());
-        validationOfEmail(applicationRequest.email());
-        validationOfPassportSeries(applicationRequest.passportSeries());
-        validationOfPassportNumber(applicationRequest.passportNumber());
+    public void validationOfLoanApplicationRequest(LoanApplicationRequestDTO loanApplicationRequest) {
+        validationOfFirstName(loanApplicationRequest.getFirstName());
+        validationOfLastName(loanApplicationRequest.getLastName());
+        validationOfMiddleName(loanApplicationRequest.getMiddleName());
+        validationOfCreditAmount(loanApplicationRequest.getAmount());
+        validationOfTerm(loanApplicationRequest.getTerm());
+        validationOfBirthdate(loanApplicationRequest.getBirthdate());
+        validationOfEmail(loanApplicationRequest.getEmail());
+        validationOfPassportSeries(loanApplicationRequest.getPassportSeries());
+        validationOfPassportNumber(loanApplicationRequest.getPassportNumber());
     }
 
     private Boolean isNameValid(String name) {
