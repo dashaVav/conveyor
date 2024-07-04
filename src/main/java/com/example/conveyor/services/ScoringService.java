@@ -10,5 +10,5 @@ import java.util.List;
 public interface ScoringService {
     List<LoanOfferDTO> createLoanOffers(LoanApplicationRequestDTO loanApplicationRequest);
 
-    CreditDTO createCreditOffer(ScoringDataDTO scoringData);
+    CreditDTO createPersonalCreditOffer(ScoringDataDTO scoringData);
 }

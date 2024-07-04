@@ -20,9 +20,9 @@ public class RateCalculationServiceImpl implements RateCalculationService {
         int age = calculateAge(birthdate);
         BigDecimal changingRate = BigDecimal.valueOf(3);
 
-        if (gender.equals(Gender.WOMAN) && age >= 35 && age < 60) {
+        if (gender.equals(Gender.FEMALE) && age >= 35 && age < 60) {
             rate = rate.subtract(changingRate);
-        } else if (gender.equals(Gender.MAN) && age >= 30 && age < 55) {
+        } else if (gender.equals(Gender.MALE) && age >= 30 && age < 55) {
             rate = rate.subtract(changingRate);
         } else {
             rate = rate.add(changingRate);
@@ -92,7 +92,7 @@ public class RateCalculationServiceImpl implements RateCalculationService {
 
     @Override
     public BigDecimal viaPosition(BigDecimal rate, Position position) {
-        if (position.equals(Position.MIDDLE_MANAGER)) {
+        if (position.equals(Position.MID_MANAGER)) {
             rate = rate.subtract(BigDecimal.valueOf(2));
         } else if (position.equals(Position.TOP_MANAGER)) {
             rate = rate.subtract(BigDecimal.valueOf(4));

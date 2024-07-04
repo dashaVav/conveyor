@@ -1,7 +1,7 @@
 package com.example.conveyor.dtos;
 
 public enum Gender {
-    WOMAN,
-    MAN,
-    NOT_BINARY
+    FEMALE,
+    MALE,
+    NON_BINARY
 }

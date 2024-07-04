@@ -28,14 +28,14 @@ public class PrescoringServiceImpl implements PrescoringService {
 
     @Override
     public void validationOfScoringData(ScoringDataDTO scoringData) {
-        validationOfFirstName(scoringData.firstName());
-        validationOfLastName(scoringData.lastName());
-        validationOfMiddleName(scoringData.middleName());
-        validationOfCreditAmount(scoringData.amount());
-        validationOfTerm(scoringData.term());
-        validationOfBirthdate(scoringData.birthdate());
-        validationOfPassportSeries(scoringData.passportSeries());
-        validationOfPassportNumber(scoringData.passportNumber());
+        validationOfFirstName(scoringData.getFirstName());
+        validationOfLastName(scoringData.getLastName());
+        validationOfMiddleName(scoringData.getMiddleName());
+        validationOfCreditAmount(scoringData.getAmount());
+        validationOfTerm(scoringData.getTerm());
+        validationOfBirthdate(scoringData.getBirthdate());
+        validationOfPassportSeries(scoringData.getPassportSeries());
+        validationOfPassportNumber(scoringData.getPassportNumber());
     }
 
     private Boolean isNameValid(String name) {

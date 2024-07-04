@@ -26,6 +26,6 @@ public class ConveyorControllerImpl implements ConveyorController {
 
     public ResponseEntity<CreditDTO> calculation(ScoringDataDTO scoringData) {
         prescoringService.validationOfScoringData(scoringData);
-        return ResponseEntity.ok(scoringService.createCreditOffer(scoringData));
+        return ResponseEntity.ok(scoringService.createPersonalCreditOffer(scoringData));
     }
 }
