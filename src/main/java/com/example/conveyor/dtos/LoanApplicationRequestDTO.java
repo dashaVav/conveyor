@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoanApplicationRequestDTO {
     private BigDecimal amount;
     private Integer term;

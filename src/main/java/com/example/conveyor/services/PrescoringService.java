@@ -1,6 +1,7 @@
 package com.example.conveyor.services;
 
 import com.example.conveyor.dtos.LoanApplicationRequestDTO;
+import com.example.conveyor.dtos.ScoringDataDTO;
 import com.example.conveyor.exception.PrescoringException;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,17 @@ public class PrescoringService {
         validationOfEmail(loanApplicationRequest.getEmail());
         validationOfPassportSeries(loanApplicationRequest.getPassportSeries());
         validationOfPassportNumber(loanApplicationRequest.getPassportNumber());
+    }
+
+    public void validationOfScoringData(ScoringDataDTO scoringData) {
+        validationOfFirstName(scoringData.firstName());
+        validationOfLastName(scoringData.lastName());
+        validationOfMiddleName(scoringData.middleName());
+        validationOfCreditAmount(scoringData.amount());
+        validationOfTerm(scoringData.term());
+        validationOfBirthdate(scoringData.birthdate());
+        validationOfPassportSeries(scoringData.passportSeries());
+        validationOfPassportNumber(scoringData.passportNumber());
     }
 
     private Boolean isNameValid(String name) {

@@ -18,4 +18,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ConveyorException> handleBadRequestsException(RuntimeException e) {
         return handleTheException(e, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(LoanRefusalException.class)
+    public ResponseEntity<ConveyorException> handleForbiddenException(RuntimeException e) {
+        return handleTheException(e, HttpStatus.FORBIDDEN);
+    }
 }

@@ -3,11 +3,11 @@ package com.example.conveyor.dtos;
 import java.math.BigDecimal;
 
 public record EmploymentDTO(
-        Enum employmentStatus,
+        EmploymentStatus employmentStatus,
         String employerINN,
         BigDecimal salary,
-        Enum position,
+        Position position,
         Integer workExperienceTotal,
-        Integer workExperienceCurren
+        Integer workExperienceCurrent
 ) {
 }
