@@ -2,6 +2,9 @@ spring:
   application:
     name: conveyor
 
+server:
+  port: 8091
+
 springdoc:
   swagger-ui:
     path: /swagger-ui
