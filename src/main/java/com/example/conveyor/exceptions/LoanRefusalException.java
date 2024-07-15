@@ -1,4 +1,4 @@
-package com.example.conveyor.exception;
+package com.example.conveyor.exceptions;
 
 public class LoanRefusalException extends RuntimeException {
     public LoanRefusalException(String message) {

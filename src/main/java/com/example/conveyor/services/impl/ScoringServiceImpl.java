@@ -17,15 +17,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
 public class ScoringServiceImpl implements ScoringService {
     private final RateCalculationService rateCalculationService;
     private final AmountCalculationService amountCalculationService;
-    private static BigDecimal INSURANCE = BigDecimal.valueOf(10000);
-    private static BigDecimal STANDARD_RATE = BigDecimal.valueOf(12);
+    private static BigDecimal INSURANCE;
+    private static BigDecimal STANDARD_RATE;
 
     public ScoringServiceImpl(RateCalculationService rateCalculationService,
                               AmountCalculationService amountCalculationService) {
@@ -40,8 +39,9 @@ public class ScoringServiceImpl implements ScoringService {
             JSONObject dataForLoan = new JSONObject(
                     new String(Files.readAllBytes(file.toPath()))
             );
-            STANDARD_RATE = dataForLoan.getBigDecimal("rate");
-            INSURANCE = dataForLoan.getBigDecimal("insurance");
+
+            STANDARD_RATE = new BigDecimal(dataForLoan.getString("rate"));
+            INSURANCE = new BigDecimal(dataForLoan.getString("insurance"));
         } catch (Exception e) {
             STANDARD_RATE = BigDecimal.valueOf(20);
             INSURANCE = BigDecimal.valueOf(10000);
@@ -72,7 +72,6 @@ public class ScoringServiceImpl implements ScoringService {
 
         return LoanOfferDTO
                 .builder()
-                .applicationId(Math.abs(new Random().nextLong()))
                 .requestedAmount(round(applicationRequest.getAmount()))
                 .totalAmount(round(totalAmount))
                 .term(applicationRequest.getTerm())

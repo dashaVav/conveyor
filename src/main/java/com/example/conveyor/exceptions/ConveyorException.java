@@ -1,4 +1,4 @@
-package com.example.conveyor.exception;
+package com.example.conveyor.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
