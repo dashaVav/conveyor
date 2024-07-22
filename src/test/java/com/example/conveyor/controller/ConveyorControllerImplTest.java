@@ -34,36 +34,26 @@ public class ConveyorControllerImplTest {
         BigDecimal amount = new BigDecimal(10000);
         Integer term = 6;
 
-        LoanApplicationRequestDTO request = LoanApplicationRequestDTO
-                .builder()
-                .amount(amount)
-                .term(term)
-                .build();
+        LoanApplicationRequestDTO request = new LoanApplicationRequestDTO()
+                .setAmount(amount)
+                .setTerm(term);
 
         List<LoanOfferDTO> loanOffers = new ArrayList<>();
-        loanOffers.add(LoanOfferDTO
-                .builder()
-                .requestedAmount(amount)
-                .term(term)
-                .build()
+        loanOffers.add(new LoanOfferDTO()
+                .setRequestedAmount(amount)
+                .setTerm(term)
         );
-        loanOffers.add(LoanOfferDTO
-                .builder()
-                .requestedAmount(amount)
-                .term(term)
-                .build()
+        loanOffers.add(new LoanOfferDTO()
+                .setRequestedAmount(amount)
+                .setTerm(term)
         );
-        loanOffers.add(LoanOfferDTO
-                .builder()
-                .requestedAmount(amount)
-                .term(term)
-                .build()
+        loanOffers.add(new LoanOfferDTO()
+                .setRequestedAmount(amount)
+                .setTerm(term)
         );
-        loanOffers.add(LoanOfferDTO
-                .builder()
-                .requestedAmount(amount)
-                .term(term)
-                .build()
+        loanOffers.add(new LoanOfferDTO()
+                .setRequestedAmount(amount)
+                .setTerm(term)
         );
 
         when(scoringService.createLoanOffers(request)).thenReturn(loanOffers);
@@ -79,16 +69,12 @@ public class ConveyorControllerImplTest {
     public void testCalculationsEndpointOk() {
         BigDecimal amount = new BigDecimal(10000);
         Integer term = 6;
-        ScoringDataDTO scoringDataDTO = ScoringDataDTO.
-                builder()
-                .amount(amount)
-                .term(term)
-                .build();
-        CreditDTO creditDTO = CreditDTO
-                .builder()
-                .amount(amount)
-                .term(term)
-                .build();
+        ScoringDataDTO scoringDataDTO = new ScoringDataDTO()
+                .setAmount(amount)
+                .setTerm(term);
+        CreditDTO creditDTO = new CreditDTO()
+                .setAmount(amount)
+                .setTerm(term);
 
         when(scoringService.createPersonalCreditOffer(scoringDataDTO)).thenReturn(creditDTO);
 

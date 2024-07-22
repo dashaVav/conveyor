@@ -70,16 +70,14 @@ public class ScoringServiceImpl implements ScoringService {
                 personalRate,
                 applicationRequest.getTerm());
 
-        return LoanOfferDTO
-                .builder()
-                .requestedAmount(round(applicationRequest.getAmount()))
-                .totalAmount(round(totalAmount))
-                .term(applicationRequest.getTerm())
-                .monthlyPayment(amountCalculationService.getMonthlyPayment(totalAmount, applicationRequest.getTerm()))
-                .rate(personalRate)
-                .isInsuranceEnabled(isInsuranceEnabled)
-                .isSalaryClient(isSalaryClient)
-                .build();
+        return new LoanOfferDTO()
+                .setRequestedAmount(round(applicationRequest.getAmount()))
+                .setTotalAmount(round(totalAmount))
+                .setTerm(applicationRequest.getTerm())
+                .setMonthlyPayment(amountCalculationService.getMonthlyPayment(totalAmount, applicationRequest.getTerm()))
+                .setRate(personalRate)
+                .setIsInsuranceEnabled(isInsuranceEnabled)
+                .setIsSalaryClient(isSalaryClient);
     }
 
     private BigDecimal calculateTotalAmount(BigDecimal amount,
@@ -101,17 +99,15 @@ public class ScoringServiceImpl implements ScoringService {
                 scoringData.getTerm());
 
         BigDecimal monthlyPayment = amountCalculationService.getMonthlyPayment(totalAmount, scoringData.getTerm());
-        return CreditDTO
-                .builder()
-                .amount(round(scoringData.getAmount()))
-                .term(scoringData.getTerm())
-                .monthlyPayment(monthlyPayment)
-                .rate(personalRate)
-                .psk(round(totalAmount))
-                .isInsuranceEnabled(scoringData.getIsInsuranceEnabled())
-                .isSalaryClient(scoringData.getIsSalaryClient())
-                .paymentSchedule(paymentScheduleElements(scoringData.getTerm(), monthlyPayment, personalRate, totalAmount))
-                .build();
+        return new CreditDTO()
+                .setAmount(round(scoringData.getAmount()))
+                .setTerm(scoringData.getTerm())
+                .setMonthlyPayment(monthlyPayment)
+                .setRate(personalRate)
+                .setPsk(round(totalAmount))
+                .setIsInsuranceEnabled(scoringData.getIsInsuranceEnabled())
+                .setIsSalaryClient(scoringData.getIsSalaryClient())
+                .setPaymentSchedule(paymentScheduleElements(scoringData.getTerm(), monthlyPayment, personalRate, totalAmount));
     }
 
     private List<PaymentScheduleElement> paymentScheduleElements(Integer term,
@@ -130,15 +126,13 @@ public class ScoringServiceImpl implements ScoringService {
                 amount = BigDecimal.valueOf(0);
             }
 
-            PaymentScheduleElement element = PaymentScheduleElement
-                    .builder()
-                    .number(number)
-                    .date(loanIssuance)
-                    .totalPayment(round(monthlyPayment))
-                    .interestPayment(round(monthlyPayment.multiply(BigDecimal.valueOf(1).subtract(rate))))
-                    .debtPayment(round(monthlyPayment.multiply(rate)))
-                    .remainingDebt(round(amount))
-                    .build();
+            PaymentScheduleElement element = new PaymentScheduleElement()
+                    .setNumber(number)
+                    .setDate(loanIssuance)
+                    .setTotalPayment(round(monthlyPayment))
+                    .setInterestPayment(round(monthlyPayment.multiply(BigDecimal.valueOf(1).subtract(rate))))
+                    .setDebtPayment(round(monthlyPayment.multiply(rate)))
+                    .setRemainingDebt(round(amount));
             paymentScheduleElements.add(element);
         }
         return paymentScheduleElements;
