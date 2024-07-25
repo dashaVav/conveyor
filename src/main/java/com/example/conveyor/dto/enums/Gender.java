@@ -1,4 +1,4 @@
-package com.example.conveyor.dtos;
+package com.example.conveyor.dto.enums;
 
 public enum Gender {
     FEMALE,

@@ -1,9 +1,9 @@
-package com.example.conveyor.services.impl;
+package com.example.conveyor.service.impl;
 
-import com.example.conveyor.dtos.*;
-import com.example.conveyor.services.AmountCalculationService;
-import com.example.conveyor.services.RateCalculationService;
-import com.example.conveyor.services.ScoringService;
+import com.example.conveyor.dto.*;
+import com.example.conveyor.service.AmountCalculationService;
+import com.example.conveyor.service.RateCalculationService;
+import com.example.conveyor.service.ScoringService;
 import com.example.conveyor.utils.LoanOfferDTOComparator;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -17,15 +17,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
 public class ScoringServiceImpl implements ScoringService {
     private final RateCalculationService rateCalculationService;
     private final AmountCalculationService amountCalculationService;
-    private static BigDecimal INSURANCE = BigDecimal.valueOf(10000);
-    private static BigDecimal STANDARD_RATE = BigDecimal.valueOf(12);
+    private static BigDecimal INSURANCE;
+    private static BigDecimal STANDARD_RATE;
 
     public ScoringServiceImpl(RateCalculationService rateCalculationService,
                               AmountCalculationService amountCalculationService) {
@@ -40,8 +39,9 @@ public class ScoringServiceImpl implements ScoringService {
             JSONObject dataForLoan = new JSONObject(
                     new String(Files.readAllBytes(file.toPath()))
             );
-            STANDARD_RATE = dataForLoan.getBigDecimal("rate");
-            INSURANCE = dataForLoan.getBigDecimal("insurance");
+
+            STANDARD_RATE = new BigDecimal(dataForLoan.getString("rate"));
+            INSURANCE = new BigDecimal(dataForLoan.getString("insurance"));
         } catch (Exception e) {
             STANDARD_RATE = BigDecimal.valueOf(20);
             INSURANCE = BigDecimal.valueOf(10000);
@@ -70,17 +70,14 @@ public class ScoringServiceImpl implements ScoringService {
                 personalRate,
                 applicationRequest.getTerm());
 
-        return LoanOfferDTO
-                .builder()
-                .applicationId(Math.abs(new Random().nextLong()))
-                .requestedAmount(round(applicationRequest.getAmount()))
-                .totalAmount(round(totalAmount))
-                .term(applicationRequest.getTerm())
-                .monthlyPayment(amountCalculationService.getMonthlyPayment(totalAmount, applicationRequest.getTerm()))
-                .rate(personalRate)
-                .isInsuranceEnabled(isInsuranceEnabled)
-                .isSalaryClient(isSalaryClient)
-                .build();
+        return new LoanOfferDTO()
+                .setRequestedAmount(round(applicationRequest.getAmount()))
+                .setTotalAmount(round(totalAmount))
+                .setTerm(applicationRequest.getTerm())
+                .setMonthlyPayment(amountCalculationService.getMonthlyPayment(totalAmount, applicationRequest.getTerm()))
+                .setRate(personalRate)
+                .setIsInsuranceEnabled(isInsuranceEnabled)
+                .setIsSalaryClient(isSalaryClient);
     }
 
     private BigDecimal calculateTotalAmount(BigDecimal amount,
@@ -102,17 +99,15 @@ public class ScoringServiceImpl implements ScoringService {
                 scoringData.getTerm());
 
         BigDecimal monthlyPayment = amountCalculationService.getMonthlyPayment(totalAmount, scoringData.getTerm());
-        return CreditDTO
-                .builder()
-                .amount(round(scoringData.getAmount()))
-                .term(scoringData.getTerm())
-                .monthlyPayment(monthlyPayment)
-                .rate(personalRate)
-                .psk(round(totalAmount))
-                .isInsuranceEnabled(scoringData.getIsInsuranceEnabled())
-                .isSalaryClient(scoringData.getIsSalaryClient())
-                .paymentSchedule(paymentScheduleElements(scoringData.getTerm(), monthlyPayment, personalRate, totalAmount))
-                .build();
+        return new CreditDTO()
+                .setAmount(round(scoringData.getAmount()))
+                .setTerm(scoringData.getTerm())
+                .setMonthlyPayment(monthlyPayment)
+                .setRate(personalRate)
+                .setPsk(round(totalAmount))
+                .setIsInsuranceEnabled(scoringData.getIsInsuranceEnabled())
+                .setIsSalaryClient(scoringData.getIsSalaryClient())
+                .setPaymentSchedule(paymentScheduleElements(scoringData.getTerm(), monthlyPayment, personalRate, totalAmount));
     }
 
     private List<PaymentScheduleElement> paymentScheduleElements(Integer term,
@@ -131,15 +126,13 @@ public class ScoringServiceImpl implements ScoringService {
                 amount = BigDecimal.valueOf(0);
             }
 
-            PaymentScheduleElement element = PaymentScheduleElement
-                    .builder()
-                    .number(number)
-                    .date(loanIssuance)
-                    .totalPayment(round(monthlyPayment))
-                    .interestPayment(round(monthlyPayment.multiply(BigDecimal.valueOf(1).subtract(rate))))
-                    .debtPayment(round(monthlyPayment.multiply(rate)))
-                    .remainingDebt(round(amount))
-                    .build();
+            PaymentScheduleElement element = new PaymentScheduleElement()
+                    .setNumber(number)
+                    .setDate(loanIssuance)
+                    .setTotalPayment(round(monthlyPayment))
+                    .setInterestPayment(round(monthlyPayment.multiply(BigDecimal.valueOf(1).subtract(rate))))
+                    .setDebtPayment(round(monthlyPayment.multiply(rate)))
+                    .setRemainingDebt(round(amount));
             paymentScheduleElements.add(element);
         }
         return paymentScheduleElements;

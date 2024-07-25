@@ -1,9 +1,9 @@
-package com.example.conveyor.services;
+package com.example.conveyor.service;
 
-import com.example.conveyor.dtos.EmploymentStatus;
-import com.example.conveyor.dtos.Gender;
-import com.example.conveyor.dtos.MaritalStatus;
-import com.example.conveyor.dtos.Position;
+import com.example.conveyor.dto.enums.EmploymentStatus;
+import com.example.conveyor.dto.enums.Gender;
+import com.example.conveyor.dto.enums.MaritalStatus;
+import com.example.conveyor.dto.enums.Position;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

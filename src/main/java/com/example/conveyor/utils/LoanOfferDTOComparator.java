@@ -1,6 +1,6 @@
 package com.example.conveyor.utils;
 
-import com.example.conveyor.dtos.LoanOfferDTO;
+import com.example.conveyor.dto.LoanOfferDTO;
 
 import java.util.Comparator;
 

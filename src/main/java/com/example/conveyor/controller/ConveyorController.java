@@ -1,9 +1,9 @@
-package com.example.conveyor.controllers;
+package com.example.conveyor.controller;
 
-import com.example.conveyor.dtos.CreditDTO;
-import com.example.conveyor.dtos.LoanApplicationRequestDTO;
-import com.example.conveyor.dtos.LoanOfferDTO;
-import com.example.conveyor.dtos.ScoringDataDTO;
+import com.example.conveyor.dto.CreditDTO;
+import com.example.conveyor.dto.LoanApplicationRequestDTO;
+import com.example.conveyor.dto.LoanOfferDTO;
+import com.example.conveyor.dto.ScoringDataDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

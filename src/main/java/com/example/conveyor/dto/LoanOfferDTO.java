@@ -1,24 +1,23 @@
-package com.example.conveyor.dtos;
+package com.example.conveyor.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class CreditDTO {
-    private BigDecimal amount;
+@NoArgsConstructor
+@Accessors(chain = true)
+public class LoanOfferDTO {
+    private Long applicationId;
+    private BigDecimal requestedAmount;
+    private BigDecimal totalAmount;
     private Integer term;
     private BigDecimal monthlyPayment;
     private BigDecimal rate;
-    private BigDecimal psk;
     private Boolean isInsuranceEnabled;
     private Boolean isSalaryClient;
-    private List<PaymentScheduleElement> paymentSchedule;
 }

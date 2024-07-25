@@ -1,8 +1,11 @@
-package com.example.conveyor.dtos;
+package com.example.conveyor.dto;
 
+import com.example.conveyor.dto.enums.Gender;
+import com.example.conveyor.dto.enums.MaritalStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class ScoringDataDTO {
     private BigDecimal amount;
     private Integer term;

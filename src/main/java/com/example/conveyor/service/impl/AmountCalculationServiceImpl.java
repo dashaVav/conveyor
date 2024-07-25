@@ -1,7 +1,7 @@
-package com.example.conveyor.services.impl;
+package com.example.conveyor.service.impl;
 
-import com.example.conveyor.services.AmountCalculationService;
-import com.example.conveyor.services.RateCalculationService;
+import com.example.conveyor.service.AmountCalculationService;
+import com.example.conveyor.service.RateCalculationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,5 +1,7 @@
-package com.example.conveyor.dtos;
+package com.example.conveyor.dto;
 
+import com.example.conveyor.dto.enums.EmploymentStatus;
+import com.example.conveyor.dto.enums.Position;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

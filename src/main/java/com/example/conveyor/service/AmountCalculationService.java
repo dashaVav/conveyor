@@ -1,4 +1,4 @@
-package com.example.conveyor.services;
+package com.example.conveyor.service;
 
 import java.math.BigDecimal;
 

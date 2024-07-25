@@ -1,11 +1,11 @@
-package com.example.conveyor.services.impl;
+package com.example.conveyor.service.impl;
 
-import com.example.conveyor.dtos.EmploymentStatus;
-import com.example.conveyor.dtos.Gender;
-import com.example.conveyor.dtos.MaritalStatus;
-import com.example.conveyor.dtos.Position;
+import com.example.conveyor.dto.enums.EmploymentStatus;
+import com.example.conveyor.dto.enums.Gender;
+import com.example.conveyor.dto.enums.MaritalStatus;
+import com.example.conveyor.dto.enums.Position;
 import com.example.conveyor.exception.LoanRefusalException;
-import com.example.conveyor.services.RateCalculationService;
+import com.example.conveyor.service.RateCalculationService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,7 +24,7 @@ public class RateCalculationServiceImpl implements RateCalculationService {
             rate = rate.subtract(changingRate);
         } else if (gender.equals(Gender.MALE) && age >= 30 && age < 55) {
             rate = rate.subtract(changingRate);
-        } else {
+        } else if (gender.equals(Gender.NON_BINARY)) {
             rate = rate.add(changingRate);
         }
 
@@ -33,7 +33,7 @@ public class RateCalculationServiceImpl implements RateCalculationService {
 
     @Override
     public BigDecimal viaAge(BigDecimal rate, LocalDate birthdate) {
-        if (calculateAge(birthdate) < 20 && calculateAge(birthdate) > 60) {
+        if (calculateAge(birthdate) < 20 || calculateAge(birthdate) > 60) {
             throw new LoanRefusalException("The age should be between 20 and 60 years old.");
         }
         return rate;
