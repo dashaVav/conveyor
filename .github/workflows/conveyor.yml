@@ -1,5 +1,9 @@
 name: Conveyor Build
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: dashavav/conveyor
+
 on:
   workflow_dispatch:
   pull_request:
