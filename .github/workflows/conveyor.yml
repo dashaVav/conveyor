@@ -36,6 +36,26 @@ jobs:
           title: Code Coverage
           update-comment: true
 
+      - name: Docker image build
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -f ${{ github.workspace }}/conveyor.Dockerfile ${{ github.workspace }}
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+            registry: ${{ env.REGISTRY }}
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Docker image push
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+
   integration-test:
     name: integration tests
     runs-on: ubuntu-latest
