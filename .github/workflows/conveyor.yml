@@ -29,16 +29,10 @@ jobs:
       - name: maven build
         run: mvn -am package
 
-      - id: jacoco
-        uses: madrapps/jacoco-report@v1.6.1
-        if: ( github.event_name != 'workflow_dispatch' )
+      - name: Test Coverage
+        uses: codecov/codecov-action@v1
         with:
-          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 30
-          min-coverage-changed-files: 30
-          title: Code Coverage
-          update-comment: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Docker image build
         run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -f ${{ github.workspace }}/conveyor.Dockerfile ${{ github.workspace }}
@@ -58,7 +52,6 @@ jobs:
 
       - name: Docker image push
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
 
   integration-test:
     name: integration tests
