@@ -5,12 +5,14 @@ import com.example.conveyor.dto.enums.Position;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class EmploymentDTO {
     private EmploymentStatus employmentStatus;
     private String employerINN;
