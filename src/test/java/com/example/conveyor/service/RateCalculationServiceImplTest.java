@@ -49,7 +49,7 @@ public class RateCalculationServiceImplTest {
     @Test
     public void testRateViaAge() {
         LocalDate birthdate = LocalDate.of(2000, 1, 1);
-        assertEquals(rateCalculationService.viaAge(STANDARD_RATE, birthdate), STANDARD_RATE);
+        assertEquals(STANDARD_RATE, rateCalculationService.viaAge(STANDARD_RATE, birthdate));
     }
 
     private static Stream<Arguments> workExperienceProvider() {
@@ -67,7 +67,7 @@ public class RateCalculationServiceImplTest {
 
     @Test
     public void testRateViaWorkExperience() {
-        assertEquals(rateCalculationService.viaWorkExperience(STANDARD_RATE, 13, 4), STANDARD_RATE);
+        assertEquals(STANDARD_RATE, rateCalculationService.viaWorkExperience(STANDARD_RATE, 13, 4));
     }
 
     private static Stream<Arguments> workDependentAmountProvider() {
@@ -132,12 +132,14 @@ public class RateCalculationServiceImplTest {
 
     @Test
     public void testRateViaSalaryException() {
-        assertThrows(LoanRefusalException.class, () -> rateCalculationService.viaSalary(STANDARD_RATE, BigDecimal.valueOf(10), BigDecimal.valueOf(10000)));
+        BigDecimal salary = BigDecimal.valueOf(10);
+        BigDecimal amount = BigDecimal.valueOf(10000);
+        assertThrows(LoanRefusalException.class, () -> rateCalculationService.viaSalary(STANDARD_RATE, salary, amount));
     }
 
     @Test
     public void testRateViaSalary() {
-        assertEquals(rateCalculationService.viaSalary(STANDARD_RATE, BigDecimal.valueOf(1000), BigDecimal.valueOf(10000)), STANDARD_RATE);
+        assertEquals(STANDARD_RATE, rateCalculationService.viaSalary(STANDARD_RATE, BigDecimal.valueOf(1000), BigDecimal.valueOf(10000)));
     }
 
     private static Stream<Arguments> viaSalaryClientProvider() {

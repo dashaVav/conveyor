@@ -17,14 +17,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ScoringServiceImpl implements ScoringService {
     private final RateCalculationService rateCalculationService;
     private final AmountCalculationService amountCalculationService;
-    private static BigDecimal INSURANCE;
-    private static BigDecimal STANDARD_RATE;
+    private BigDecimal INSURANCE;
+    private BigDecimal STANDARD_RATE;
 
     public ScoringServiceImpl(RateCalculationService rateCalculationService,
                               AmountCalculationService amountCalculationService) {
@@ -55,7 +54,7 @@ public class ScoringServiceImpl implements ScoringService {
         loanOffers.add(createOneOffer(false, true, loanApplicationRequest));
         loanOffers.add(createOneOffer(true, false, loanApplicationRequest));
         loanOffers.add(createOneOffer(true, true, loanApplicationRequest));
-        return loanOffers.stream().sorted(new LoanOfferDTOComparator()).collect(Collectors.toList());
+        return loanOffers.stream().sorted(new LoanOfferDTOComparator()).toList();
     }
 
     private LoanOfferDTO createOneOffer(Boolean isInsuranceEnabled,

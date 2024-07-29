@@ -50,7 +50,7 @@ public class ScoringServiceImplTest {
         applicationRequest.setAmount(loanAmount).setTerm(term);
 
         List<LoanOfferDTO> loanOffers = scoringService.createLoanOffers(applicationRequest);
-        assertEquals(loanOffers.size(), 4);
+        assertEquals(4, loanOffers.size());
         loanOffers.forEach(loanOffer -> {
             assertEquals(loanOffer.getTerm(), term);
             assertEquals(loanOffer.getRequestedAmount(), loanAmount);
@@ -60,8 +60,7 @@ public class ScoringServiceImplTest {
             assertTrue(loanOffers.get(i).getRate().compareTo(loanOffers.get(i + 1).getRate()) > 0);
         }
 
-        assertEquals(loanOffers.stream().filter(offer -> offer.getIsInsuranceEnabled().equals(isInsuranceEnabled) && offer.getIsSalaryClient().equals(isSalaryClient)).count(),
-                1);
+        assertEquals(1, loanOffers.stream().filter(offer -> offer.getIsInsuranceEnabled().equals(isInsuranceEnabled) && offer.getIsSalaryClient().equals(isSalaryClient)).count());
     }
 
     @Test

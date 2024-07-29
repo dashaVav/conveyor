@@ -86,6 +86,7 @@ public class RateCalculationServiceImpl implements RateCalculationService {
             case UNEMPLOYED -> throw new LoanRefusalException("Loan is unemployed");
             case SELF_EMPLOYED -> rate = rate.add(BigDecimal.valueOf(1));
             case BUSINESS_OWNER -> rate = rate.add(BigDecimal.valueOf(3));
+            default -> rate = rate.add(BigDecimal.valueOf(0));
         }
         return rate;
     }

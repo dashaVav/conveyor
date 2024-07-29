@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(LoanRefusalException.class)
-    public ResponseEntity<ConveyorException> handleForbiddenException(RuntimeException e) {
+    public ResponseEntity<ConveyorError> handleForbiddenException(RuntimeException e) {
         return new ResponseEntity<>(
-                new ConveyorException(e.getMessage(), HttpStatus.FORBIDDEN.value()),
+                new ConveyorError(e.getMessage(), HttpStatus.FORBIDDEN.value()),
                 HttpStatus.FORBIDDEN
         );
     }
