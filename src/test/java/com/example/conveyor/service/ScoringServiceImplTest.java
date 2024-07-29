@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ScoringServiceImplTest {
+class ScoringServiceImplTest {
     private ScoringServiceImpl scoringService;
 
     @BeforeEach
@@ -43,7 +43,7 @@ public class ScoringServiceImplTest {
 
     @ParameterizedTest
     @MethodSource("isInsuranceEnabledAndIsSalaryClientProvider")
-    public void testCreateLoanOffers(Boolean isInsuranceEnabled, Boolean isSalaryClient) {
+    void testCreateLoanOffers(Boolean isInsuranceEnabled, Boolean isSalaryClient) {
         BigDecimal loanAmount = new BigDecimal("10000.00");
         int term = 6;
         LoanApplicationRequestDTO applicationRequest = new LoanApplicationRequestDTO();
@@ -64,7 +64,7 @@ public class ScoringServiceImplTest {
     }
 
     @Test
-    public void testCreatePersonalCreditOffer() {
+    void testCreatePersonalCreditOffer() {
         BigDecimal amount = new BigDecimal("10000.00");
         int term = 6;
         ScoringDataDTO scoringData = new ScoringDataDTO()

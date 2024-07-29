@@ -22,8 +22,8 @@ import java.util.List;
 public class ScoringServiceImpl implements ScoringService {
     private final RateCalculationService rateCalculationService;
     private final AmountCalculationService amountCalculationService;
-    private BigDecimal INSURANCE;
-    private BigDecimal STANDARD_RATE;
+    private BigDecimal insurance;
+    private BigDecimal standardRate;
 
     public ScoringServiceImpl(RateCalculationService rateCalculationService,
                               AmountCalculationService amountCalculationService) {
@@ -39,11 +39,11 @@ public class ScoringServiceImpl implements ScoringService {
                     new String(Files.readAllBytes(file.toPath()))
             );
 
-            STANDARD_RATE = new BigDecimal(dataForLoan.getString("rate"));
-            INSURANCE = new BigDecimal(dataForLoan.getString("insurance"));
+            standardRate = new BigDecimal(dataForLoan.getString("rate"));
+            insurance = new BigDecimal(dataForLoan.getString("insurance"));
         } catch (Exception e) {
-            STANDARD_RATE = BigDecimal.valueOf(20);
-            INSURANCE = BigDecimal.valueOf(10000);
+            standardRate = BigDecimal.valueOf(20);
+            insurance = BigDecimal.valueOf(10000);
         }
     }
 
@@ -60,7 +60,7 @@ public class ScoringServiceImpl implements ScoringService {
     private LoanOfferDTO createOneOffer(Boolean isInsuranceEnabled,
                                         Boolean isSalaryClient,
                                         LoanApplicationRequestDTO applicationRequest) {
-        BigDecimal personalRate = rateCalculationService.viaSalaryClient(STANDARD_RATE, isSalaryClient);
+        BigDecimal personalRate = rateCalculationService.viaSalaryClient(standardRate, isSalaryClient);
         personalRate = rateCalculationService.viaInsurance(personalRate, isInsuranceEnabled);
 
         BigDecimal totalAmount = calculateTotalAmount(
@@ -83,7 +83,7 @@ public class ScoringServiceImpl implements ScoringService {
                                             Boolean isInsuranceEnabled,
                                             BigDecimal personalRate,
                                             Integer term) {
-        BigDecimal totalAmount = amountCalculationService.getAmountViaInsurance(amount, isInsuranceEnabled, INSURANCE);
+        BigDecimal totalAmount = amountCalculationService.getAmountViaInsurance(amount, isInsuranceEnabled, insurance);
         return amountCalculationService.getTotalAmountViaRate(totalAmount, personalRate, term);
     }
 
@@ -138,7 +138,7 @@ public class ScoringServiceImpl implements ScoringService {
     }
 
     private BigDecimal calculateRateForPersonalOffer(ScoringDataDTO scoringData) {
-        BigDecimal rate = STANDARD_RATE;
+        BigDecimal rate = standardRate;
         rate = rateCalculationService.viaGender(rate, scoringData.getGender(), scoringData.getBirthdate());
         rate = rateCalculationService.viaAge(rate, scoringData.getBirthdate());
         rate = rateCalculationService.viaWorkExperience(rate,

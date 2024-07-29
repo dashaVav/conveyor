@@ -14,7 +14,7 @@ public class AmountCalculationServiceImpl implements AmountCalculationService {
     private final RateCalculationService rateCalculationService;
 
     @Override
-    public BigDecimal getAmountViaInsurance(BigDecimal amount, Boolean isInsuranceEnabled, BigDecimal insurance) {
+    public BigDecimal getAmountViaInsurance(BigDecimal amount, boolean isInsuranceEnabled, BigDecimal insurance) {
         return isInsuranceEnabled ? amount.add(insurance) : amount;
     }
 
