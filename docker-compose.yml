@@ -1,8 +1,0 @@
-services:
-  conveyor:
-    build:
-      context: .
-      dockerfile: conveyor.Dockerfile
-    restart: always
-    ports:
-      - "8091:8091"
