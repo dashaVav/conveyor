@@ -18,6 +18,7 @@ public class LoanApplicationRequestDTO {
     @NotNull
     private BigDecimal amount;
 
+    @NotNull
     private Integer term;
 
     @NotBlank

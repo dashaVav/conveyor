@@ -28,7 +28,9 @@ public class EmploymentDTO {
     @NotNull
     private Position position;
 
+    @NotNull
     private Integer workExperienceTotal;
 
+    @NotNull
     private Integer workExperienceCurrent;
 }

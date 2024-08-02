@@ -20,6 +20,7 @@ public class ScoringDataDTO {
     @NotNull
     private BigDecimal amount;
 
+    @NotNull
     private Integer term;
 
     @NotBlank
@@ -51,6 +52,7 @@ public class ScoringDataDTO {
     @NotNull
     private MaritalStatus maritalStatus;
 
+    @NotNull
     private Integer dependentAmount;
 
     @NotNull
@@ -59,7 +61,9 @@ public class ScoringDataDTO {
     @NotBlank
     private String account;
 
+    @NotNull
     private Boolean isInsuranceEnabled;
 
+    @NotNull
     private Boolean isSalaryClient;
 }
