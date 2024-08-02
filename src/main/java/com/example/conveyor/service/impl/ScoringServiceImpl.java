@@ -5,19 +5,21 @@ import com.example.conveyor.service.AmountCalculationService;
 import com.example.conveyor.service.RateCalculationService;
 import com.example.conveyor.service.ScoringService;
 import com.example.conveyor.utils.LoanOfferDTOComparator;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import org.springframework.util.FileCopyUtils;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class ScoringServiceImpl implements ScoringService {
     private final RateCalculationService rateCalculationService;
@@ -34,14 +36,14 @@ public class ScoringServiceImpl implements ScoringService {
 
     private void readDataForLoan() {
         try {
-            File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "data_for_loan.json");
-            JSONObject dataForLoan = new JSONObject(
-                    new String(Files.readAllBytes(file.toPath()))
-            );
+            ClassPathResource classPathResource = new ClassPathResource("data_for_loan.json");
+            byte[] fileAsBytes = FileCopyUtils.copyToByteArray(classPathResource.getInputStream());
+            JSONObject dataForLoan = new JSONObject(new String(fileAsBytes, StandardCharsets.UTF_8));
 
-            standardRate = new BigDecimal(dataForLoan.getString("rate"));
-            insurance = new BigDecimal(dataForLoan.getString("insurance"));
+            standardRate = BigDecimal.valueOf(dataForLoan.getFloat("rate"));
+            insurance = BigDecimal.valueOf(dataForLoan.getFloat("insurance"));
         } catch (Exception e) {
+            log.error("Error reading data for loan: {}", e.getMessage());
             standardRate = BigDecimal.valueOf(20);
             insurance = BigDecimal.valueOf(10000);
         }
