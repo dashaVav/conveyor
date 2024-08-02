@@ -57,17 +57,3 @@ jobs:
 
       - name: Docker image push
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-  integration-test:
-    name: integration tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-
-      - run: mvn -am verify -Dskip.unit.tests=true

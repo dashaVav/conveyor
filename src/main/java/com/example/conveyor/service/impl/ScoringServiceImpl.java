@@ -40,8 +40,8 @@ public class ScoringServiceImpl implements ScoringService {
             byte[] fileAsBytes = FileCopyUtils.copyToByteArray(classPathResource.getInputStream());
             JSONObject dataForLoan = new JSONObject(new String(fileAsBytes, StandardCharsets.UTF_8));
 
-            standardRate = BigDecimal.valueOf(dataForLoan.getFloat("rate"));
-            insurance = BigDecimal.valueOf(dataForLoan.getFloat("insurance"));
+            standardRate = new BigDecimal(dataForLoan.getString("rate"));
+            insurance = new BigDecimal(dataForLoan.getString("insurance"));
         } catch (Exception e) {
             log.error("Error reading data for loan: {}", e.getMessage());
             standardRate = BigDecimal.valueOf(20);
