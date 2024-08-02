@@ -21,12 +21,12 @@ public class ConveyorControllerImpl implements ConveyorController {
     private final ScoringService scoringService;
 
     public ResponseEntity<List<LoanOfferDTO>> offers(LoanApplicationRequestDTO loanApplicationRequest) {
-        log.info("/offers requested. Body: {}", LoggerUtils.cut(loanApplicationRequest, 100));
+        log.info("/conveyor/offers requested. Body: {}", LoggerUtils.cut(loanApplicationRequest, 100));
         return ResponseEntity.ok(scoringService.createLoanOffers(loanApplicationRequest));
     }
 
     public ResponseEntity<CreditDTO> calculation(ScoringDataDTO scoringData) {
-        log.info("/calculation requested. Body: {}", LoggerUtils.cut(scoringData, 100));
+        log.info("/conveyor/calculation requested. Body: {}", LoggerUtils.cut(scoringData, 100));
         return ResponseEntity.ok(scoringService.createPersonalCreditOffer(scoringData));
     }
 }
