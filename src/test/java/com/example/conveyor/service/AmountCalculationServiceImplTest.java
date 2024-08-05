@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class AmountCalculationServiceImplTest {
+class AmountCalculationServiceImplTest {
 
     private static AmountCalculationServiceImpl amountCalculationService;
 
@@ -23,7 +23,7 @@ public class AmountCalculationServiceImplTest {
     private static RateCalculationService rateCalculationService;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         rateCalculationService = Mockito.mock(RateCalculationService.class);
         amountCalculationService = new AmountCalculationServiceImpl(rateCalculationService);
     }
@@ -37,17 +37,17 @@ public class AmountCalculationServiceImplTest {
 
     @ParameterizedTest
     @MethodSource("getAmountViaInsuranceProvider")
-    public void testGetAmountViaInsurance(BigDecimal amount,
-                                          Boolean isInsuranceEnabled,
-                                          BigDecimal insurance,
-                                          BigDecimal expectedAmount
+    void testGetAmountViaInsurance(BigDecimal amount,
+                                   Boolean isInsuranceEnabled,
+                                   BigDecimal insurance,
+                                   BigDecimal expectedAmount
     ) {
         BigDecimal result = amountCalculationService.getAmountViaInsurance(amount, isInsuranceEnabled, insurance);
         assertEquals(expectedAmount, result);
     }
 
     @Test
-    public void testGetTotalAmountViaRate() {
+    void testGetTotalAmountViaRate() {
         BigDecimal rate = BigDecimal.valueOf(10);
         Integer term = 6;
 
@@ -59,7 +59,7 @@ public class AmountCalculationServiceImplTest {
     }
 
     @Test
-    public void testGetMonthlyPayment() {
+    void testGetMonthlyPayment() {
         BigDecimal result = amountCalculationService.getMonthlyPayment(BigDecimal.valueOf(12000), 12);
         assertEquals(new BigDecimal("1000.00"), result);
     }

@@ -22,7 +22,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ConveyorControllerImplTest {
+
+class ConveyorControllerImplTest {
     @InjectMocks
     private ConveyorControllerImpl conveyorController;
 
@@ -30,7 +31,7 @@ public class ConveyorControllerImplTest {
     private ScoringService scoringService;
 
     @Test
-    public void testOffersEndpointOk() {
+    void testOffersEndpointOk() {
         BigDecimal amount = new BigDecimal(10000);
         Integer term = 6;
 
@@ -66,7 +67,7 @@ public class ConveyorControllerImplTest {
     }
 
     @Test
-    public void testCalculationsEndpointOk() {
+    void testCalculationsEndpointOk() {
         BigDecimal amount = new BigDecimal(10000);
         Integer term = 6;
         ScoringDataDTO scoringDataDTO = new ScoringDataDTO()

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ConveyorException {
+public class ConveyorError {
     private String error;
     private Integer status;
 }

@@ -25,9 +25,9 @@ public interface RateCalculationService {
 
     BigDecimal viaPosition(BigDecimal rate, Position position);
 
-    BigDecimal viaSalaryClient(BigDecimal rate, Boolean isSalaryClient);
+    BigDecimal viaSalaryClient(BigDecimal rate, boolean isSalaryClient);
 
-    BigDecimal viaInsurance(BigDecimal rate, Boolean isInsuranceEnabled);
+    BigDecimal viaInsurance(BigDecimal rate, boolean isInsuranceEnabled);
 
     BigDecimal getMonthlyPercentageInShapes(BigDecimal rate);
 

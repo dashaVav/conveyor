@@ -8,3 +8,17 @@ server:
 springdoc:
   swagger-ui:
     path: /swagger-ui
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
