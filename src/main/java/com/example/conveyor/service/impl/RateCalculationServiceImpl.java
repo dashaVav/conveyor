@@ -86,6 +86,7 @@ public class RateCalculationServiceImpl implements RateCalculationService {
             case UNEMPLOYED -> throw new LoanRefusalException("Loan is unemployed");
             case SELF_EMPLOYED -> rate = rate.add(BigDecimal.valueOf(1));
             case BUSINESS_OWNER -> rate = rate.add(BigDecimal.valueOf(3));
+            default -> rate = rate.add(BigDecimal.valueOf(0));
         }
         return rate;
     }
@@ -101,7 +102,7 @@ public class RateCalculationServiceImpl implements RateCalculationService {
     }
 
     @Override
-    public BigDecimal viaSalaryClient(BigDecimal rate, Boolean isSalaryClient) {
+    public BigDecimal viaSalaryClient(BigDecimal rate, boolean isSalaryClient) {
         if (isSalaryClient) {
             rate = rate.subtract(BigDecimal.valueOf(0.3));
         }
@@ -109,7 +110,7 @@ public class RateCalculationServiceImpl implements RateCalculationService {
     }
 
     @Override
-    public BigDecimal viaInsurance(BigDecimal rate, Boolean isInsuranceEnabled) {
+    public BigDecimal viaInsurance(BigDecimal rate, boolean isInsuranceEnabled) {
         if (isInsuranceEnabled) {
             rate = rate.subtract(BigDecimal.valueOf(3));
         } else {

@@ -3,7 +3,7 @@ package com.example.conveyor.service;
 import java.math.BigDecimal;
 
 public interface AmountCalculationService {
-    BigDecimal getAmountViaInsurance(BigDecimal amount, Boolean isInsuranceEnabled, BigDecimal insurance);
+    BigDecimal getAmountViaInsurance(BigDecimal amount, boolean isInsuranceEnabled, BigDecimal insurance);
 
     BigDecimal getTotalAmountViaRate(BigDecimal amount, BigDecimal rate, Integer term);
 
