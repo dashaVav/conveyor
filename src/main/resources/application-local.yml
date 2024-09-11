@@ -2,7 +2,7 @@ spring:
   application:
     name: conveyor
   kafka:
-    bootstrap-servers: kafka:9091
+    bootstrap-servers: localhost:29091
     topic:
       audit: audit
 
