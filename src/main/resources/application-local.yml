@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: conveyor
+  kafka:
+    bootstrap-servers: localhost:29091
+    topic:
+      audit: audit
+
+server:
+  port: 8091
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
